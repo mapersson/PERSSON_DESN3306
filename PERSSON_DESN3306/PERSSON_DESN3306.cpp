@@ -109,10 +109,10 @@ void CreateTriangle() {
 		-1.0f,1.0f,
 		-1.0f,-1.0f,
 		1.0f,1.0f,
-
-		-1.0f,-1.0f,
+		
 		1.0f,1.0f,
-		1.0f,-1.0f
+		1.0f,-1.0f,
+		-1.0f,-1.0f,
 	};
 
 	glGenVertexArrays(1, &VAO);
@@ -185,7 +185,7 @@ int main()
 		glUseProgram(shader);
 		glBindVertexArray(VAO);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		glBindVertexArray(0); 
 		glUseProgram(0);

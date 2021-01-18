@@ -9,7 +9,7 @@
 using namespace std;
 
 // Determines OpenGL Window dimensions
-const GLint WIDTH = 2400, HEIGHT = 1800; //this will vary depending on your computer
+const GLint WIDTH = 1800, HEIGHT = 1800; //this will vary depending on your computer
 
 GLuint VBO, VAO;
 GLuint shader;
@@ -104,15 +104,26 @@ void CompileShaders() {
 
 }
 
-void CreateTriangle() {
+void CreateCircle() {
 	GLfloat vertices[] = {
-		-1.0f,1.0f,
-		-1.0f,-1.0f,
-		1.0f,1.0f,
-		
-		1.0f,1.0f,
-		1.0f,-1.0f,
-		-1.0f,-1.0f,
+		0.0f,0.0f,
+		0.00f,	1.00f,
+		0.38f,	0.92f,
+		0.71f,	0.71f,
+		0.92f,	0.38f,
+		1.00f,	0.00f,
+		0.92f,	-0.38f,
+		0.71f,	-0.71f,
+		0.38f,	-0.92f,
+		0.00f,	-1.00f,
+		-0.38f,	-0.92f,
+		-0.71f,	-0.71f,
+		-0.92f,	-0.38f,
+		-1.00f,	0.00f,
+		-0.92f,	0.38f,
+		-0.71f,	0.71f,
+		-0.38f,	0.92f,
+		0.00f,	1.00f,
 	};
 
 	glGenVertexArrays(1, &VAO);
@@ -128,7 +139,6 @@ void CreateTriangle() {
 	glBindVertexArray(0);
 
 }
-
 
 int main()
 {
@@ -170,8 +180,7 @@ int main()
 
 	glViewport(0, 0, bufferWidth, bufferHeight); // Setup the Viewport dimension
 
-	CreateTriangle();
-
+	CreateCircle();
 	CompileShaders();
 
 
@@ -183,9 +192,9 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT); // Clear the memory buffer
 
 		glUseProgram(shader);
-		glBindVertexArray(VAO);
+		glBindVertexArray(VAO); 
 
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawArrays(GL_TRIANGLE_FAN, 0, 18);
 
 		glBindVertexArray(0); 
 		glUseProgram(0);

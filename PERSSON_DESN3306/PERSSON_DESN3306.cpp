@@ -4,6 +4,7 @@
 #include <iostream> //controls input/output streams
 #include <GL\glew.h>  //controls basic opengl functionality
 #include <GLFW\glfw3.h> //controls GUI window systems, input (keyboard, mouse, trackpad etc), and output
+#include <math.h>
 
 
 using namespace std;
@@ -105,27 +106,21 @@ void CompileShaders() {
 }
 
 void CreateCircle() {
-	GLfloat vertices[] = {
-		0.0f,0.0f,
-		0.00f,	1.00f,
-		0.38f,	0.92f,
-		0.71f,	0.71f,
-		0.92f,	0.38f,
-		1.00f,	0.00f,
-		0.92f,	-0.38f,
-		0.71f,	-0.71f,
-		0.38f,	-0.92f,
-		0.00f,	-1.00f,
-		-0.38f,	-0.92f,
-		-0.71f,	-0.71f,
-		-0.92f,	-0.38f,
-		-1.00f,	0.00f,
-		-0.92f,	0.38f,
-		-0.71f,	0.71f,
-		-0.38f,	0.92f,
-		0.00f,	1.00f,
-	};
+	
+	float pi = 2*acos(0.0);
+	float angle = 0;
+	int numOfIncr = 16;
+	GLfloat vertices[18 * 2];
+	vertices[0] = 0.0f;
+	vertices[1] = 0.0f;
 
+	for ( int i = 2; i < ( numOfIncr + 2 ) * 2; i = i + 2 ) //Need to offest the index by 2 to account for origin vertex. 
+	{
+		vertices[i] = sin(angle);
+		vertices[i+1] = cos(angle);
+		angle = angle + 2*pi/numOfIncr;
+	}
+	
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 	glGenBuffers(1, &VBO);

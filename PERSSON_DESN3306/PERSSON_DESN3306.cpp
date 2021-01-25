@@ -20,33 +20,34 @@ GLuint uniformXMoveLoc, uniformYMoveLoc;
 // Vertex Shader code based on GLSL version 3.30
 // Make the Shader code globally available
 static const char* vShader = "                                                \n\
-#version 330                                                                  \n\                                                                            \n\
+#version 330                                                                  \n\
+																			\n\
 layout (location = 0) in vec3 pos;			                                  \n\
 out vec4 myColor;                                                             \n\
 uniform float xMove;                                                          \n\
 uniform float yMove;                                                          \n\
-                                                                          \n\
+																		  \n\
 void main()                                                                   \n\
 {                                                                             \n\
-    gl_Position = vec4(0.5*pos.x + xMove, 0.5*pos.y, pos.z, 1.0);	          \n\
-    //gl_Position = vec4(0.5*pos.x , 0.5*pos.y + yMove, pos.z, 1.0);	      \n\
-    //gl_Position = vec4(0.5*pos.x + xMove, 0.5*pos.y + yMove, pos.z, 1.0);	  \n\
-    //myColor=vec4(abs(pos), 1.0);                                               \n\
-    //myColor=vec4(1.0,1.0,0.0,1.0);                                            \n\
+	// gl_Position = vec4(0.5*pos.x + xMove, 0.5*pos.y, pos.z, 1.0);	          \n\
+	gl_Position = vec4(0.5*pos.x , 0.5*pos.y + yMove, pos.z, 1.0);	      \n\
+	// gl_Position = vec4(0.5*pos.x + xMove, 0.5*pos.y + yMove, pos.z, 1.0);	  \n\
+	//myColor=vec4(abs(pos), 1.0);                                               \n\
+	//myColor=vec4(1.0,1.0,0.0,1.0);                                            \n\
 }";
 
 
 // The Fragment Shader for version 3.30
 static const char* fShader = "                                                 \n\
 #version 330                                                                   \n\
-                                                                               \n\
+																			   \n\
 out vec4 color;                                                               \n\
 in vec4 myColor;                                                               \n\
-                                                                               \n\
+																			   \n\
 void main()                                                                    \n\
 {                                                                              \n\
-      color = vec4(1.0, 0.0, 0.0, 1.0);                                          \n\
-      //color=myColor;                                                             \n\
+	  color = vec4(1.0, 0.0, 0.0, 1.0);                                          \n\
+	  //color=myColor;                                                             \n\
 }";  
 
 void AddShader(GLuint theProgram, const char* shaderCode, GLenum shaderType)
@@ -107,7 +108,6 @@ void CompileShaders()
 		printf("Error validating program: '%s'\n", eLog);
 		return;
 	}
-
 
 
 
@@ -206,24 +206,23 @@ int main()
 
 		glUseProgram(shader);
 
-		
-		
-		if (i <= 0 || i >= 5000)
+		if (i <= 0 || i >= 3000)
 			xUpdate *= sign;
-		i += xUpdate;
+		// i += xUpdate;
 		
 		
-		if (j <= 0 || j >= 3000)
+		if (j <= 0 || j >= 2996 )
 			yUpdate *= sign;
-		j += yUpdate;
+		// j += yUpdate;
 		
 
-		i = (i + 3) % 5001;  //i=0..5000
+		i = (i + xUpdate) % 3000;  //i=0..5000
+		j = (j + yUpdate) % 3000;
 
 		//(i-2500)/2500;  i= -1..to +1
 		
-		glUniform1f(uniformXMoveLoc, (i-2500)/2500.0f);
-		//glUniform1f(uniformYMoveLoc, (j - 1500) / 1500.0f);		
+		// glUniform1f(uniformXMoveLoc, (i-1500)/1500.0f);
+		glUniform1f(uniformYMoveLoc, (j - 1500) / 1500.0f);		
 		//glUniform1f(uniformXMoveLoc, -0.5);
 
 

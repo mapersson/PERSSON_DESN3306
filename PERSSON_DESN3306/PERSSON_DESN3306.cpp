@@ -30,8 +30,8 @@ uniform float yMove;                                                          \n
 void main()                                                                   \n\
 {                                                                             \n\
 	// gl_Position = vec4(0.5*pos.x + xMove, 0.5*pos.y, pos.z, 1.0);	          \n\
-	gl_Position = vec4(0.5*pos.x , 0.5*pos.y + yMove, pos.z, 1.0);	      \n\
-	// gl_Position = vec4(0.5*pos.x + xMove, 0.5*pos.y + yMove, pos.z, 1.0);	  \n\
+	// gl_Position = vec4(0.5*pos.x , 0.5*pos.y + yMove, pos.z, 1.0);	      \n\
+	gl_Position = vec4(0.5*pos.x + xMove, 0.5*pos.y + yMove, pos.z, 1.0);	  \n\
 	//myColor=vec4(abs(pos), 1.0);                                               \n\
 	//myColor=vec4(1.0,1.0,0.0,1.0);                                            \n\
 }";
@@ -206,12 +206,12 @@ int main()
 
 		glUseProgram(shader);
 
-		if (i <= 0 || i >= 3000)
+		if (i <= 0 || i >= 2996)
 			xUpdate *= sign;
 		// i += xUpdate;
 		
 		
-		if (j <= 0 || j >= 2996 )
+		if (j <= 0 || j >= 2996 ) //Anything above 2996 with a delta of 3 and j mod 3000 goes to 0. 
 			yUpdate *= sign;
 		// j += yUpdate;
 		
@@ -221,7 +221,7 @@ int main()
 
 		//(i-2500)/2500;  i= -1..to +1
 		
-		// glUniform1f(uniformXMoveLoc, (i-1500)/1500.0f);
+		glUniform1f(uniformXMoveLoc, (i - 1500) / 1500.0f);
 		glUniform1f(uniformYMoveLoc, (j - 1500) / 1500.0f);		
 		//glUniform1f(uniformXMoveLoc, -0.5);
 

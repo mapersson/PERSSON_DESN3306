@@ -10,7 +10,7 @@
 using namespace std;
 
 // Determines OpenGL Window dimensions
-const GLint WIDTH = 2400, HEIGHT = 1800; //this will vary depending on your computer
+const GLint WIDTH = 1800, HEIGHT = 1800; //this will vary depending on your computer
 GLuint VBO, VAO; //declare globally
 GLuint shader; //use global declaration
 GLuint uniformXMoveLoc, uniformYMoveLoc, uniformVColorLoc;
@@ -118,9 +118,12 @@ void CreateTriangle(){
 			-1.0f, -1.0f,
 			1.0f, -1.0f,
 			0.0f, 1.0f,
-			-1.0f, 1.0f,
-			-0.25f, 1.0f,
-			-1.0f, 0.0f
+			-0.5f, 0.5f,
+			-0.5f, -0.50f,
+			0.5f, 0.5f,
+			-0.5f, -0.50f,
+			0.5f, 0.5f,
+			0.5,-0.5,
 	};
 	
 
@@ -292,7 +295,10 @@ int main()
 		glUniform1f(uniformXMoveLoc, (iNew - 2500) / 2500.0f);
 		glUniform1f(uniformYMoveLoc, (jNew - 1500) / 1500.0f);
 		glUniform4f(uniformVColorLoc, o2R, o2G, o2B, 1.0);
-		glDrawArrays(GL_TRIANGLES, 3, 3);
+		glDrawArrays(GL_TRIANGLES, 3, 6);
+
+		glUniform4f(uniformVColorLoc, 1.0, 0.0, 0.0, 1.0);
+		glDrawArrays(GL_TRIANGLES, 6, 3);
 
 
 

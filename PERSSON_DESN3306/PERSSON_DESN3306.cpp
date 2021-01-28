@@ -292,7 +292,7 @@ int main()
 		glUniform1f(uniformXMoveLoc, (iNew - 2500) / 2500.0f);
 		glUniform1f(uniformYMoveLoc, (jNew - 1500) / 1500.0f);
 		glUniform4f(uniformVColorLoc, o2R, o2G, o2B, 1.0);
-		glDrawArrays(GL_TRIANGLES, 3, 6);
+		glDrawArrays(GL_TRIANGLES, 3, 3);
 
 
 
